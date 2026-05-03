@@ -9,17 +9,23 @@ Bayangkan kamu punya dokumen 100 halaman. Daripada membandingkan seluruh isinya 
 
 Properti kritis hash yang baik (seperti SHA-256 atau SHA-3): pertama, **deterministik** — input yang sama selalu menghasilkan output yang sama. Kedua, **avalanche effect** — mengubah satu bit di input mengubah ~50% bit di output secara tidak terduga. Ketiga, **one-way** — kamu tidak bisa membalikkan hash untuk mendapatkan input aslinya. Keempat, **collision resistant** — hampir mustahil menemukan dua input berbeda yang menghasilkan hash sama.
 
+![alt text](images/image.png)
+
 ### Asymmetric Cryptography — Kunci Publik & Privat
 
 Ini adalah jantung dari digital signature. Ide dasarnya sangat elegan: kamu punya **dua kunci yang secara matematis terhubung**. Apa yang di-*lock* dengan satu kunci, hanya bisa di-*unlock* dengan kunci pasangannya — dan tidak ada cara efisien untuk menurunkan kunci privat dari kunci publik.
 
 **RSA** (Rivest–Shamir–Adleman) bekerja dengan mendispersi kesulitan memfaktorkan bilangan prima besar. **ECDSA** (Elliptic Curve DSA) yang lebih modern bekerja di atas kurva eliptik, memberikan keamanan setara RSA dengan kunci yang jauh lebih pendek (256-bit ECDSA ≈ 3072-bit RSA dalam hal keamanan).
 
+![alt text](images/image-1.png)
+
 ### Bagaimana Digital Signature Bekerja — Alur Lengkap
 
 Sekarang kita gabungkan dua konsep di atas. Proses signing sebenarnya sangat logis bila dipikirkan: kamu tidak bisa "mengenkripsi" dokumen besar dengan private key (terlalu lambat), jadi kamu hash dulu dokumennya untuk mendapat representasi kecil yang unik, lalu enkripsi hash itu saja dengan private key. Hasilnya adalah signature.
 
 Proses verifikasi adalah kebalikannya secara elegan: penerima mendekripsi signature dengan public key untuk mendapatkan hash asli, lalu menghitung ulang hash dari dokumen yang diterima, dan membandingkan keduanya. Kalau sama → dokumen tidak dimodifikasi dan benar-benar ditandatangani oleh pemegang private key tersebut.
+
+![alt text](images/image-2.png)
 
 ### Dimana Signature Disimpan? — Standard Industri
 
